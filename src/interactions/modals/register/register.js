@@ -11,7 +11,15 @@ export default {
 
         try {
             await interaction.member.setNickname(newNickname);
+const probezeitRole = interaction.guild.roles.cache.find(
+    role => role.name === 'Probezeit ~ 2 Wochen'
+);
 
+if (!probezeitRole) {
+    throw new Error('Rolle "Probezeit ~ 2 Wochen" wurde nicht gefunden.');
+}
+
+await interaction.member.roles.add(probezeitRole);
             await interaction.reply({
                 content:
                     `✅ **Registrierung erfolgreich!**\n\n` +
