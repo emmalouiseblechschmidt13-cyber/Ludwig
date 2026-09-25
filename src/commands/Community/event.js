@@ -19,6 +19,12 @@ export default {
         ),
 
     async execute(interaction) {
+       if (!interaction.memberPermissions?.has(PermissionFlagsBits.ManageMessages)) {
+    return interaction.reply({
+        content: '❌ Diesen Befehl dürfen nur Moderatoren verwenden.',
+        ephemeral: true,
+    });
+}
         if (interaction.options.getSubcommand() === 'setup') {
             const row = new ActionRowBuilder().addComponents(
                 new ButtonBuilder()
