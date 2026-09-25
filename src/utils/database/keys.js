@@ -23,7 +23,9 @@ export function getInviteTrackingKey(guildId) {
 export function getMemberInvitesKey(guildId, userId) {
     return `guild:${guildId}:invites:${userId}`;
 }
-
+export function getRegistrationDateKey(guildId, userId) {
+    return `guild:${guildId}:registration_date:${userId}`;
+}
 export function getInviteUsesKey(guildId, inviteCode) {
     return `guild:${guildId}:invite_uses:${inviteCode}`;
 }
