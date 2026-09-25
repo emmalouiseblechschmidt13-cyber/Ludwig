@@ -10,7 +10,7 @@ export default {
     data: new SlashCommandBuilder()
         .setName('event')
         .setDescription('Verwaltet die wöchentlichen Club-Events')
-        .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
 
         .addSubcommand(subcommand =>
             subcommand
