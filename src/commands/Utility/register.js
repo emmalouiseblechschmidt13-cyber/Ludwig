@@ -1,47 +1,32 @@
 import {
     SlashCommandBuilder,
-    ModalBuilder,
-    TextInputBuilder,
-    TextInputStyle,
+    PermissionFlagsBits,
     ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
 } from 'discord.js';
 
 export default {
     data: new SlashCommandBuilder()
         .setName('register')
-        .setDescription('Register your Discord and Star Stable name'),
+        .setDescription('Sendet das Registrierungsformular')
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild),
 
     async execute(interaction) {
-        const modal = new ModalBuilder()
-            .setCustomId('register_modal')
-            .setTitle('Star Stable Registrierung');
+        const button = new ButtonBuilder()
+            .setCustomId('register_button')
+            .setLabel('Jetzt registrieren')
+            .setEmoji('📝')
+            .setStyle(ButtonStyle.Primary);
 
-        const nicknameInput = new TextInputBuilder()
-            .setCustomId('nickname')
-            .setLabel('Dein Spitzname')
-            .setStyle(TextInputStyle.Short)
-            .setPlaceholder('z. B. Taro')
-            .setRequired(true)
-            .setMaxLength(20);
+        const row = new ActionRowBuilder().addComponents(button);
 
-        const starStableInput = new TextInputBuilder()
-            .setCustomId('star_stable_name')
-            .setLabel('Dein Star Stable Name')
-            .setStyle(TextInputStyle.Short)
-            .setPlaceholder('z. B. Crystal Purplecry')
-            .setRequired(true)
-            .setMaxLength(25);
-
-        const nicknameRow = new ActionRowBuilder().addComponents(
-            nicknameInput
-        );
-
-        const starStableRow = new ActionRowBuilder().addComponents(
-            starStableInput
-        );
-
-        modal.addComponents(nicknameRow, starStableRow);
-
-        await interaction.showModal(modal);
+        await interaction.reply({
+            content:
+                '## 🦢 Registrierung\n\n' +
+                'Klicke auf **📝 Jetzt registrieren**, um dich für den Club zu registrieren.\n\n' +
+                'Du wirst nach deinem **Spitznamen** und deinem **Star Stable Namen** gefragt.',
+            components: [row],
+        });
     },
 };
