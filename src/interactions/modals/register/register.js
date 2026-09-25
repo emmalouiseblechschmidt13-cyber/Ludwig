@@ -1,3 +1,5 @@
+import { setInDb } from '../../../utils/database.js';
+import { getRegistrationDateKey } from '../../../utils/database/keys.js';
 export default {
     name: 'register_modal',
 
@@ -20,6 +22,10 @@ if (!probezeitRole) {
 }
 
 await interaction.member.roles.add(probezeitRole);
+       await setInDb(
+    getRegistrationDateKey(interaction.guild.id, interaction.user.id),
+    new Date().toISOString()
+);
             await interaction.reply({
                 content:
                     `✅ **Registrierung erfolgreich!**\n\n` +
